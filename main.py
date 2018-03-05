@@ -16,6 +16,19 @@ def import_level(file):
         level_matrix.append(level_line)
     return level_matrix
 
+def import_level(file):
+    """import level from file"""
+    level_file = open(file, "r") # open file from hdd
+    level = level_file.read() # read level content
+    level = level.split("\n") # split file by lines (sep \n)
+    level_matrix = []
+    for line in level:
+        level_line = []
+        for box in line:
+            level_line.append(int(box))
+        level_matrix.append(level_line)
+    return level_matrix
+
 def create_map(layout):
     """take level data and create layout matrix"""
     grid = [] # initialize main layout array

@@ -5,19 +5,7 @@
 
 def import_level(file):
     """import level from file"""
-    level_file = open(file, "r") # open file from hdd
-    level = level_file.read() # read level content
-    level = level.split("\n") # split file by lines (sep \n)
-    level_matrix = []
-    for line in level:
-        level_line = []
-        for box in line:
-            level_line.append(int(box))
-        level_matrix.append(level_line)
-    return level_matrix
-
-def import_level(file):
-    """import level from file"""
+    # TODO : refactor using with command (with open(file, arg) as var)
     level_file = open(file, "r") # open file from hdd
     level = level_file.read() # read level content
     level = level.split("\n") # split file by lines (sep \n)
@@ -53,9 +41,14 @@ def display_map(matrix):
 
 def character_position(matrix):
     """calculate current position"""
-    # if grid[][] == "M" in grid:
-        # print(int(i, j))
-    pass
+    position = ()
+    for i, line in enumerate(matrix):
+        for j, box in enumerate(line):
+            if box == "M":
+                position = (i, j)
+            else:
+                continue
+    print(position)
 
 def character_move(position, move):
     """update map representation to move character"""
@@ -76,6 +69,23 @@ def main():
     level = import_level(input("file location"))
     level_map = create_map(level)
     display_map(level_map)
+    character_position(level_map)
+    # continue_playing = True
+    # while continue_playing:
+    #     move = input("use wasd to move")
+    #     move = str(move.lower())
+    #     if move == "w":
+    #         # move up
+    #     elif move == "s":
+    #         # move down
+    #     elif move == "a":
+    #         # move right
+    #     elif move == "d":
+    #         # move left
+    #     else:
+    #         print("insert valid input")
+    #         continue
+    #     pass
 
 
 if __name__ == "__main__":

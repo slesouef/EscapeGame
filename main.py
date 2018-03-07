@@ -69,20 +69,20 @@ def available_moves(position, matrix):
         available_move.append(move)
     return available_move
 
-def possible_moves(matrix):
+def possible_moves(matrix, character_moves):
     """check which move are valid from list of available moves"""
     # create list of all tiles the player can move to
     moves = []
     for i, line in enumerate(matrix):
-        tile = []
         for j, box in enumerate(line):
             if box == " ":
-                tile.append(i)
-                tile.append(j)
-                moves.append(tile)
-    print(moves)
+                moves.append([i, j])
     # return list of allowed positions
-    # pass
+    valid_moves = []
+    for move in moves:
+        if move in character_moves:
+            valid_moves.append(move)
+    return valid_moves
 
 def character_move(position, available_moves):
     """update map representation to move character"""
@@ -101,8 +101,8 @@ def main():
     position = character_position(level_map)
     print(position)
     moves = available_moves(position, level_map)
-    print(moves)
-    possible_moves(level_map)
+    next_moves = possible_moves(level_map, moves)
+    print(next_moves)
     # continue_playing = True
     # while continue_playing:
     #     move = input("use wasd to move")

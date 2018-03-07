@@ -2,12 +2,12 @@
 # -*- coding:utf-8 -*-
 """Main function of the game """
 
-
 def import_level(file):
     """import level from file"""
     # TODO : refactor using with command (with open(file, arg) as var)
     level_file = open(file, "r") # open file from hdd
     level = level_file.read() # read level content
+    level_file.close()
     level = level.split("\n") # split file by lines (sep \n)
     level_matrix = []
     for line in level:
@@ -41,35 +41,68 @@ def display_map(matrix):
 
 def character_position(matrix):
     """calculate current position"""
-    position = ()
+    position = []
     for i, line in enumerate(matrix):
         for j, box in enumerate(line):
             if box == "M":
-                position = (i, j)
-            else:
-                continue
-    print(position)
+                position.append(i)
+                position.append(j)
+    return position
 
-def character_move(position, move):
+def available_moves(position, matrix):
+    """pre-check what moves are available from current position"""
+    # create list of possible next position from current position
+    available_move = []
+    row = position[0]
+    column = position[1]
+    if not row - 1 < 0:
+        move = [row - 1, column]
+        available_move.append(move)
+    if not row + 1 > len(matrix):
+        move = [row + 1, column]
+        available_move.append(move)
+    if not column - 1 < 0:
+        move = [row, column - 1]
+        available_move.append(move)
+    if not column + 1 > len(matrix):
+        move = [row, column + 1]
+        available_move.append(move)
+    return available_move
+
+def possible_moves(matrix):
+    """check which move are valid from list of available moves"""
+    # create list of all tiles the player can move to
+    moves = []
+    for i, line in enumerate(matrix):
+        tile = []
+        for j, box in enumerate(line):
+            if box == " ":
+                tile.append(i)
+                tile.append(j)
+                moves.append(tile)
+    print(moves)
+    # return list of allowed positions
+    # pass
+
+def character_move(position, available_moves):
     """update map representation to move character"""
     # receive input value (wasd?)
+    # verifiy that it is in list of allowed positions
     # change current box value to empty space
     # change box moved to value to character
     # refresh display (?)
     pass
-
-def validate_move(position, move):
-    """check that the move is valid"""
-    # validate move (if box value == 0 => break)
-    pass
-
 
 def main():
     """main function"""
     level = import_level(input("file location"))
     level_map = create_map(level)
     display_map(level_map)
-    character_position(level_map)
+    position = character_position(level_map)
+    print(position)
+    moves = available_moves(position, level_map)
+    print(moves)
+    possible_moves(level_map)
     # continue_playing = True
     # while continue_playing:
     #     move = input("use wasd to move")

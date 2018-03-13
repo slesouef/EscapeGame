@@ -15,7 +15,7 @@ class Level:
         self.file = file
         self.structure = []
 
-    def create_level(self, file):
+    def create_level(self):
         """create level structure from file"""
         with open(self.file, "r") as level_file: # open file from hdd
             grid = [] # initialize main layout array
@@ -23,7 +23,7 @@ class Level:
                 grid_line = [] # initialize array for single line
                 for box in line:
                     if box != "\n":
-                        grid_line.append() # add wall element to line array
+                        grid_line.append(box) # add wall element to line array
                 grid.append(grid_line) # add line array to main array
         self.structure = grid
 
@@ -31,7 +31,6 @@ class Level:
         """display level in pygame from structure"""
         # load assets
         wall = pygame.image.load(WALL_IMAGE).convert_alpha()
-        player = pygame.image.load(PLAYER_IMAGE).convert_alpha()
         guardian = pygame.image.load(GUARDIAN_IMAGE).convert_alpha()
 
         # integrate assets on structure
@@ -43,8 +42,8 @@ class Level:
                 tile_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
                 if tile == "M":
                     window.blit(wall, (tile_x, tile_y))
-                elif tile == "D":
-                    window.blit(player, (tile_x, tile_y))
+                # elif tile == "D":
+                #     window.blit(player, (tile_x, tile_y))
                 elif tile == "A":
                     window.blit(guardian, (tile_x, tile_y))
                 nb_tile += 1
@@ -55,16 +54,48 @@ class Character:
     """character attributes and move function"""
 
     def __init__(self, level):
-        # position 
+        # sprite
+        self.image = pygame.image.load(PLAYER_IMAGE).convert_alpha()
+        # position
         self.tile_x = 0 # starting tile value
         self.tile_y = 0 # starting line value
         # starting pixel values
-        self.x = 0 
-        self.y = 0
+        self.pixel_x = 0
+        self.pixel_y = 0
         # refer to current level structure
         self.level = level
 
     def move(self, direction):
         """update player location by tile depending on direction input"""
-        
 
+        # move character right
+        if direction == "right":
+            # check the move is inside window:
+            if self.tile_x + 1 < (SPRITES_PER_ROW -1):
+                # check tile is not a wall
+                if self.level.structure[self.tile_x + 1][self.tile_y] != "M":
+                    # move character one tile
+                    self.tile_x += 1
+                    # update pixel value
+                    self.pixel_x = self.tile_x * TILE_SIZE
+
+        # move character left
+        if direction == "left":
+            if self.tile_x - 1 > 0:
+                if self.level.structure[self.tile_x -1][self.tile_y] != "M":
+                    self.tile_x -= 1
+                    self.pixel_x = self.tile_x * TILE_SIZE
+
+        # move character up
+        if direction == "up":
+            if self.tile_y - 1 > 0:
+                if self.level.structure[self.tile_x][self.tile_y -1] != "M":
+                    self.tile_y -= 1
+                    self.pixel_y = self.tile_y * TILE_SIZE
+
+        # move character down
+        if direction == "down":
+            if self.tile_y + 1 < (SPRITES_PER_ROW - 1):
+                if self.level.structure[self.tile_x][self.tile_y + 1] != "M":
+                    self.tile_y += 1
+                    self.pixel_y = self.tile_y * TILE_SIZE

@@ -3,16 +3,16 @@
 """file containing all constants for the game"""
 
 # display window parameters
-tile_size = 30
-sprites_per_row = 15
-window_size = tile_size * sprites_per_row
+TILE_SIZE = 30
+SPRITES_PER_ROW = 15
+WINDOW_SIZE = TILE_SIZE * SPRITES_PER_ROW
 
 # game ids
-caption = "EscapeGame"
+CAPTION = "EscapeGame"
 
 # asset constants
-menu_image = "data/menu.png"
-background_image = "data/fond.jpg"
-wall_image = "data/mur.png"
-player_image = "data/macgyver.png"
-guardian_image = "data/murdoc.png"
+MENU_IMAGE = "data/menu.png"
+BACKGROUND_IMAGE = "data/fond.jpg"
+WALL_IMAGE = "data/mur.png"
+PLAYER_IMAGE = "data/macgyver.png"
+GUARDIAN_IMAGE = "data/murdoc.png"

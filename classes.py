@@ -27,23 +27,41 @@ class Level:
                 grid.append(grid_line) # add line array to main array
         self.structure = grid
 
-    def display_level(self, structure):
+    def display_level(self, window):
         """display level in pygame from structure"""
         # load assets
-        wall = pygame.image.load(wall_image).convert_alpha()
-        player = pygame.image.load(player_image).convert_alpha()
-        guardian = pygame.image.load(guardian_image).convert_alpha()
+        wall = pygame.image.load(WALL_IMAGE).convert_alpha()
+        player = pygame.image.load(PLAYER_IMAGE).convert_alpha()
+        guardian = pygame.image.load(GUARDIAN_IMAGE).convert_alpha()
 
-        # 
+        # integrate assets on structure
+        nb_line = 0
+        for line in self.structure:
+            nb_tile = 0
+            for tile in line:
+                tile_x = nb_tile * TILE_SIZE # set x pixel value to be displayed from tile size
+                tile_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
+                if tile == "M":
+                    window.blit(wall, (tile_x, tile_y))
+                elif tile == "D":
+                    window.blit(player, (tile_x, tile_y))
+                elif tile == "A":
+                    window.blit(guardian, (tile_x, tile_y))
+                nb_tile += 1
+            nb_line += 1
+
 
 class Character:
     """character attributes and move function"""
+
     def __init__(self, level):
         # position 
-        self.tile_x = 0
-        self.tile_y = 0
-        self.x = 0
+        self.tile_x = 0 # starting tile value
+        self.tile_y = 0 # starting line value
+        # starting pixel values
+        self.x = 0 
         self.y = 0
+        # refer to current level structure
         self.level = level
 
     def move(self, direction):

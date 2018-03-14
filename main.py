@@ -8,6 +8,7 @@ from pygame.locals import *
 from constants import WINDOW_SIZE, CAPTION, MENU_IMAGE, BACKGROUND_IMAGE
 from character import *
 from level import *
+from item import *
 
 def main():
     """main game function with menu and level subloops"""
@@ -68,6 +69,10 @@ def main():
             # initiate player
             mcg = Character(level)
 
+            # initiate inventory
+            items = Item(level)
+            items.create_items()
+
         # LEVEL SUB-LOOP
         while playing == 1:
             # cap refresh rate
@@ -94,8 +99,9 @@ def main():
                         mcg.move("left")
 
             # pickup item
-            # if level.structure[mcg.tile_y][mcg.tile_x] == "I":
-                # items.pick_up_item(position)
+            if level.structure[mcg.tile_y][mcg.tile_x] == "I":
+                position = [mcg.pixel_x, mcg.pixel_y]
+                items.pick_up_item(window, position)
 
             # refresh play window values
             window.blit(background, (0, 0))
@@ -106,7 +112,7 @@ def main():
             pygame.display.update()
 
             # victory condition
-            if level.structure[mcg.tile_y][mcg.tile_x] == "A": # and items.picked_up_item == 3:
+            if level.structure[mcg.tile_y][mcg.tile_x] == "A" and items.picked_up_item == 3:
                 playing = 0
 
 

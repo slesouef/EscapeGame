@@ -7,6 +7,8 @@ import pygame
 
 from pygame.locals import *
 
+from constants import BACKGROUND_IMAGE
+
 class Item:
     """docsting"""
 
@@ -28,8 +30,7 @@ class Item:
         # else restart loop from random values creation
         pass
 
-    def pick_up_item(self, position):
+    def pick_up_item(self, window, position):
         """method for adding items to inventory when player is on tile"""
-        # remove item from level map (blit background at item position)
-        # increment counter
-        pass
+        window.blit(BACKGROUND_IMAGE, (position[0], position[1]))
+        self.picked_up_item += 1

@@ -1,12 +1,10 @@
 #! /usr/bin/env python3
 # -*- coding:utf-8 -*-
-"""module containing the classes necessary for the game to play
- - a level class with the methods to create and display a level
- - a character class with the necessary attributes and a move function"""
+"""character class with the necessary attributes and a move function"""
 import pygame
 from pygame.locals import *
 
-from constants import *
+from constants import SPRITES_PER_ROW, TILE_SIZE, PLAYER_IMAGE
 
 class Character:
     """character attributes and move function"""

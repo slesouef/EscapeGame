@@ -5,7 +5,7 @@ import pygame
 
 from pygame.locals import *
 
-from constants import *
+from constants import WINDOW_SIZE, CAPTION, MENU_IMAGE, BACKGROUND_IMAGE
 from character import *
 from level import *
 
@@ -20,7 +20,7 @@ def main():
     pygame.display.set_caption(CAPTION)
 
     # refresh display
-    pygame.display.flip()
+    pygame.display.update()
 
    
     # initiate game loops
@@ -33,7 +33,7 @@ def main():
         window.blit(landing, (0, 0))
 
         #refresh display
-        pygame.display.flip()
+        pygame.display.update()
 
         # initiate sub-loops
         menu_open = 1
@@ -94,6 +94,8 @@ def main():
                         mcg.move("left")
 
             # pickup item
+            # if level.structure[mcg.tile_y][mcg.tile_x] == "I":
+                # items.pick_up_item(position)
 
             # refresh play window values
             window.blit(background, (0, 0))
@@ -101,10 +103,10 @@ def main():
             window.blit(mcg.image, (mcg.pixel_x, mcg.pixel_y))
 
             # refresh display window
-            pygame.display.flip()
+            pygame.display.update()
 
             # victory condition
-            if level.structure[mcg.tile_y][mcg.tile_x] == "A": # and items.picked_up == 3:
+            if level.structure[mcg.tile_y][mcg.tile_x] == "A": # and items.picked_up_item == 3:
                 playing = 0
 
 

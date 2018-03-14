@@ -6,7 +6,8 @@ import pygame
 from pygame.locals import *
 
 from constants import *
-from classes import *
+from character import *
+from level import *
 
 def main():
     """main game function with menu and level subloops"""
@@ -103,7 +104,7 @@ def main():
             pygame.display.flip()
 
             # victory condition
-            if level.structure[mcg.tile_x][mcg.tile_y] == "A": # and items.picked_up == 3:
+            if level.structure[mcg.tile_y][mcg.tile_x] == "A": # and items.picked_up == 3:
                 playing = 0
 
 

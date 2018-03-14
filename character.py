@@ -8,48 +8,6 @@ from pygame.locals import *
 
 from constants import *
 
-class Level:
-    """level structure must be imported from an external file"""
-
-    def __init__(self, file):
-        self.file = file
-        self.structure = []
-
-    def create_level(self):
-        """create level structure from file"""
-        with open(self.file, "r") as level_file: # open file from hdd
-            grid = [] # initialize main layout array
-            for line in level_file:
-                grid_line = [] # initialize array for single line
-                for box in line:
-                    if box != "\n":
-                        grid_line.append(box) # add wall element to line array
-                grid.append(grid_line) # add line array to main array
-        self.structure = grid
-
-    def display_level(self, window):
-        """display level in pygame from structure"""
-        # load assets
-        wall = pygame.image.load(WALL_IMAGE).convert_alpha()
-        guardian = pygame.image.load(GUARDIAN_IMAGE).convert_alpha()
-
-        # integrate assets on structure
-        nb_line = 0
-        for line in self.structure:
-            nb_tile = 0
-            for tile in line:
-                tile_x = nb_tile * TILE_SIZE # set x pixel value to be displayed from tile size
-                tile_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
-                if tile == "M":
-                    window.blit(wall, (tile_x, tile_y))
-                # elif tile == "D":
-                #     window.blit(player, (tile_x, tile_y))
-                elif tile == "A":
-                    window.blit(guardian, (tile_x, tile_y))
-                nb_tile += 1
-            nb_line += 1
-
-
 class Character:
     """character attributes and move function"""
 
@@ -71,9 +29,9 @@ class Character:
         # move character right
         if direction == "right":
             # check the move is inside window:
-            if self.tile_x + 1 < (SPRITES_PER_ROW -1):
+            if self.tile_x + 1 <= (SPRITES_PER_ROW - 1):
                 # check tile is not a wall
-                if self.level.structure[self.tile_x + 1][self.tile_y] != "M":
+                if self.level.structure[self.tile_y][self.tile_x + 1] != "M":
                     # move character one tile
                     self.tile_x += 1
                     # update pixel value
@@ -81,21 +39,21 @@ class Character:
 
         # move character left
         if direction == "left":
-            if self.tile_x - 1 > 0:
-                if self.level.structure[self.tile_x -1][self.tile_y] != "M":
+            if self.tile_x - 1 >= 0:
+                if self.level.structure[self.tile_y][self.tile_x - 1] != "M":
                     self.tile_x -= 1
                     self.pixel_x = self.tile_x * TILE_SIZE
 
         # move character up
         if direction == "up":
-            if self.tile_y - 1 > 0:
-                if self.level.structure[self.tile_x][self.tile_y -1] != "M":
+            if self.tile_y - 1 >= 0:
+                if self.level.structure[self.tile_y - 1][self.tile_x] != "M":
                     self.tile_y -= 1
                     self.pixel_y = self.tile_y * TILE_SIZE
 
         # move character down
         if direction == "down":
-            if self.tile_y + 1 < (SPRITES_PER_ROW - 1):
-                if self.level.structure[self.tile_x][self.tile_y + 1] != "M":
+            if self.tile_y + 1 <= (SPRITES_PER_ROW - 1):
+                if self.level.structure[self.tile_y + 1][self.tile_x] != "M":
                     self.tile_y += 1
                     self.pixel_y = self.tile_y * TILE_SIZE

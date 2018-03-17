@@ -5,7 +5,7 @@ import pygame
 
 from pygame.locals import *
 
-from constants import WINDOW_SIZE, CAPTION, MENU_IMAGE, BACKGROUND_IMAGE
+from constants import *
 from character import *
 from level import *
 from item import *
@@ -99,17 +99,20 @@ def main():
                         mcg.move("left")
 
             # pickup item
-            if level.structure[mcg.tile_y][mcg.tile_x] == "I":
+            if level.structure[mcg.tile_y][mcg.tile_x] != "O":
                 position = [mcg.pixel_x, mcg.pixel_y]
                 items.pick_up_item(window, position)
 
             # refresh play window values
             window.blit(background, (0, 0))
             level.display_level(window)
+            items.display_items(window)
             window.blit(mcg.image, (mcg.pixel_x, mcg.pixel_y))
 
             # refresh display window
             pygame.display.update()
+
+            print(items.picked_up_item)
 
             # victory condition
             if level.structure[mcg.tile_y][mcg.tile_x] == "A" and items.picked_up_item == 3:

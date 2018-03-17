@@ -4,7 +4,7 @@
 import pygame
 from pygame.locals import *
 
-from constants import SPRITES_PER_ROW, TILE_SIZE, PLAYER_IMAGE
+from constants import *
 
 class Character:
     """character attributes and move function"""

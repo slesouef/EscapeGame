@@ -5,7 +5,7 @@ import pygame
 
 from pygame.locals import *
 
-from constants import WALL_IMAGE, GUARDIAN_IMAGE, TILE_SIZE
+from constants import *
 
 class Level:
     """level structure must be imported from an external file"""
@@ -37,11 +37,11 @@ class Level:
         for line in self.structure:
             nb_tile = 0
             for tile in line:
-                tile_x = nb_tile * TILE_SIZE # set x pixel value to be displayed from tile size
-                tile_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
+                pixel_x = nb_tile * TILE_SIZE # set x pixel value to be displayed from tile size
+                pixel_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
                 if tile == "M":
-                    window.blit(wall, (tile_x, tile_y))
+                    window.blit(wall, (pixel_x, pixel_y))
                 elif tile == "A":
-                    window.blit(guardian, (tile_x, tile_y))
+                    window.blit(guardian, (pixel_x, pixel_y))
                 nb_tile += 1
             nb_line += 1

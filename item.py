@@ -24,8 +24,8 @@ class Item:
         items_set = 0
         while items_set < 3:
             # create random values for x,y item coordinates
-            item_x = random.randint(0, (SPRITES_PER_ROW - 1))
-            item_y = random.randint(0, (SPRITES_PER_ROW - 1))
+            item_x = random.randint(1, (SPRITES_PER_ROW - 1))
+            item_y = random.randint(1, (SPRITES_PER_ROW - 1))
             # if check random position is not a wall
             if self.level.structure[item_y][item_x] != "M":
                 if items_set == 0:

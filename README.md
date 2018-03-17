@@ -10,3 +10,7 @@ a guard in order to escape a labytinth
 0.2 the level map can be imported from an external file
 
 0.3 refactoring for pygame integration
+
+0.4 playable state without items in the game
+
+1.0 items have been integrated and the game is in a releasable state

@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 # -*- coding:utf-8 -*-
 """run the game"""
+import time
 import pygame
 
 from pygame.locals import *
@@ -22,7 +23,6 @@ def main():
 
     # refresh display
     pygame.display.update()
-
    
     # initiate game loops
     keep_open = 1
@@ -98,11 +98,6 @@ def main():
                     elif events.key == K_LEFT:
                         mcg.move("left")
 
-            # pickup item
-            if level.structure[mcg.tile_y][mcg.tile_x] != "O":
-                position = [mcg.pixel_x, mcg.pixel_y]
-                items.pick_up_item(window, position)
-
             # refresh play window values
             window.blit(background, (0, 0))
             level.display_level(window)
@@ -112,11 +107,30 @@ def main():
             # refresh display window
             pygame.display.update()
 
-            print(items.picked_up_item)
-
             # victory condition
-            if level.structure[mcg.tile_y][mcg.tile_x] == "A" and items.picked_up_item == 3:
-                playing = 0
+            if level.structure[mcg.tile_y][mcg.tile_x] == "A":
+                if items.picked_up_item == 3: # game won
+                    # initialise win display
+                    won = pygame.image.load(WON_IMAGE).convert()
+                    # display splash screen
+                    window.blit(won, (0, 0))
+                    pygame.display.flip()
+                    # freeze splash for a few seconds
+                    time.sleep(5)
+                    # end game loop
+                    playing = 0
+                else:
+                    # game lost
+                    lost = pygame.image.load(LOST_IMAGE).convert()
+                    window.blit(lost, (0, 0))
+                    pygame.display.flip()
+                    time.sleep(5)
+                    playing = 0
+
+            # pickup item
+            if level.structure[mcg.tile_y][mcg.tile_x] != "O":
+                position = [mcg.pixel_x, mcg.pixel_y]
+                items.pick_up_item(window, position)
 
 
 if __name__ == "__main__":

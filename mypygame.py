@@ -26,6 +26,11 @@ class Mypygame:
         #refresh display
         pygame.display.update()
 
+    def load_asset(self, asset):
+        """method to load graphic assets from file"""
+        tile_asset = pygame.image.load(asset).convert_alpha()
+        return tile_asset
+
     def display_asset(self, item, position):
         """method to update displayed tiles"""
         self.window.blit(item, (position[0], position[1]))

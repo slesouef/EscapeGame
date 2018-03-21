@@ -1,17 +1,16 @@
 #! /usr/bin/env python3
 # -*- coding:utf-8 -*-
 """character class with the necessary attributes and a move function"""
-import pygame
-from pygame.locals import *
-
+from mypygame import *
 from constants import *
 
 class Character:
     """character attributes and move function"""
 
     def __init__(self, level):
+        self.mypygame = Mypygame()
         # sprite
-        self.image = pygame.image.load(PLAYER_IMAGE).convert_alpha()
+        self.image = self.mypygame.load_asset(PLAYER_IMAGE)
         # position
         self.tile_x = 0 # starting tile value
         self.tile_y = 0 # starting line value

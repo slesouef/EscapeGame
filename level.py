@@ -1,10 +1,7 @@
 #! /usr/bin/env pyhton3
 # -*- coding:utf-8 -*-
 """level class with the methods to create and display a level"""
-import pygame
-
-from pygame.locals import *
-
+from mypygame import *
 from constants import *
 
 class Level:
@@ -13,6 +10,10 @@ class Level:
     def __init__(self, file):
         self.file = file
         self.structure = []
+        self.mypygame = Mypygame()
+        # load assets
+        self.wall = self.mypygame.load_asset(WALL_IMAGE)
+        self.guardian = self.mypygame.load_asset(GUARDIAN_IMAGE)
 
     def create_level(self):
         """create level structure from file"""
@@ -26,12 +27,8 @@ class Level:
                 grid.append(grid_line) # add line array to main array
         self.structure = grid
 
-    def display_level(self, window):
+    def display_level(self):
         """display level in pygame from structure"""
-        # load assets
-        wall = pygame.image.load(WALL_IMAGE).convert_alpha()
-        guardian = pygame.image.load(GUARDIAN_IMAGE).convert_alpha()
-
         # integrate assets on structure
         nb_line = 0
         for line in self.structure:
@@ -39,9 +36,10 @@ class Level:
             for tile in line:
                 pixel_x = nb_tile * TILE_SIZE # set x pixel value to be displayed from tile size
                 pixel_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
+                position = [pixel_x, pixel_y]
                 if tile == "M":
-                    window.blit(wall, (pixel_x, pixel_y))
+                    self.mypygame.display_asset(self.wall, position)
                 elif tile == "A":
-                    window.blit(guardian, (pixel_x, pixel_y))
+                    self.mypygame.display_asset(self.guardian, position)
                 nb_tile += 1
             nb_line += 1

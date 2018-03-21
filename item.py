@@ -2,7 +2,6 @@
 # -*- coding:utf-8 -*-
 """item class for the game with random location at each start and item
 counter"""
-import random
 
 from mypygame import *
 from constants import *
@@ -21,29 +20,6 @@ class Item:
         self.pipe = self.mypygame.load_asset(PIPE_IMAGE)
         self.needle = self.mypygame.load_asset(NEEDLE_IMAGE)
         self.background = self.mypygame.load_asset(BACKGROUND_IMAGE)
-
-    def create_items(self):
-        """method to modify level structure with item markers at random location"""
-        # create randomization loop counter
-        items_set = 0
-        while items_set < 3:# for item in items
-            # create random values for x,y item coordinates
-            item_x = random.randint(1, (SPRITES_PER_ROW - 1))
-            item_y = random.randint(1, (SPRITES_PER_ROW - 1))
-            # if check random position is not a wall
-            if self.level.structure[item_y][item_x] != "M":
-                if items_set == 0:
-                    # modify level structure with item marker
-                    self.level.structure[item_y][item_x] = "B"
-                elif items_set == 1:
-                    self.level.structure[item_y][item_x] = "P"
-                elif items_set == 2:
-                    self.level.structure[item_y][item_x] = "N"
-                # increment counter
-                items_set += 1
-            # else restart loop from random values creation
-            else:
-                continue
 
     def display_items(self, window):
         """display items not picked up"""

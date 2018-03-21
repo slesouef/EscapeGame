@@ -51,6 +51,7 @@ def main():
             # create level
             level = Level(file)
             level.create_level()
+            level.create_items()
             level.display_level()
 
             # initiate player
@@ -58,7 +59,6 @@ def main():
 
             # initiate inventory
             items = Item(level)
-            items.create_items()
 
         # LEVEL SUB-LOOP
         while playing == 1:

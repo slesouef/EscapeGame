@@ -22,7 +22,7 @@ class Item:
         """method to modify level structure with item markers at random location"""
         # create randomization loop counter
         items_set = 0
-        while items_set < 3:
+        while items_set < 3:# for item in items
             # create random values for x,y item coordinates
             item_x = random.randint(1, (SPRITES_PER_ROW - 1))
             item_y = random.randint(1, (SPRITES_PER_ROW - 1))

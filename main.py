@@ -2,10 +2,8 @@
 # -*- coding:utf-8 -*-
 """run the game"""
 import time
-import pygame
 
-from pygame.locals import *
-
+from mypygame import *
 from constants import *
 from character import *
 from level import *
@@ -13,28 +11,16 @@ from item import *
 
 def main():
     """main game function with menu and level subloops"""
+    # initiate pygame from mypygame
+    mypygame = Mypygame()
 
-    # initiate pygame
-    pygame.init()
-    window = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
-
-    # set window caption
-    pygame.display.set_caption(CAPTION)
-
-    # refresh display
-    pygame.display.update()
-   
     # initiate game loops
     keep_open = 1
-    
+
     # MAIN GAME LOOP
     while keep_open == 1:
-        # setup game menu
-        landing = pygame.image.load(MENU_IMAGE)
-        window.blit(landing, (0, 0))
-
-        #refresh display
-        pygame.display.update()
+        # display landing page from mypygame
+        mypygame.display_landing()
 
         # initiate sub-loops
         menu_open = 1
@@ -64,7 +50,7 @@ def main():
             # create level
             level = Level(file)
             level.create_level()
-            level.display_level(window)
+            level.display_level(mypygame.window)
 
             # initiate player
             mcg = Character(level)
@@ -99,10 +85,10 @@ def main():
                         mcg.move("left")
 
             # refresh play window values
-            window.blit(background, (0, 0))
-            level.display_level(window)
-            items.display_items(window)
-            window.blit(mcg.image, (mcg.pixel_x, mcg.pixel_y))
+            mypygame.window.blit(background, (0, 0))
+            level.display_level(mypygame.window)
+            items.display_items(mypygame.window)
+            mypygame.window.blit(mcg.image, (mcg.pixel_x, mcg.pixel_y))
 
             # refresh display window
             pygame.display.update()
@@ -113,7 +99,7 @@ def main():
                     # initialise win display
                     won = pygame.image.load(WON_IMAGE).convert()
                     # display splash screen
-                    window.blit(won, (0, 0))
+                    mypygame.window.blit(won, (0, 0))
                     pygame.display.flip()
                     # freeze splash for a few seconds
                     time.sleep(5)
@@ -122,7 +108,7 @@ def main():
                 else:
                     # game lost
                     lost = pygame.image.load(LOST_IMAGE).convert()
-                    window.blit(lost, (0, 0))
+                    mypygame.window.blit(lost, (0, 0))
                     pygame.display.flip()
                     time.sleep(5)
                     playing = 0
@@ -130,7 +116,7 @@ def main():
             # pickup item
             if level.structure[mcg.tile_y][mcg.tile_x] != "O":
                 position = [mcg.pixel_x, mcg.pixel_y]
-                items.pick_up_item(window, position)
+                items.pick_up_item(mypygame.window, position)
 
 
 if __name__ == "__main__":

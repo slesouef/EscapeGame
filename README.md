@@ -14,3 +14,7 @@ a guard in order to escape a labytinth
 0.4 playable state without items in the game
 
 1.0 items have been integrated and the game is in a releasable state
+
+1.1 created a wrapper for pygame calls in order to increase efficiency
+
+1.2 load calls have been reduced to once per class. Game uses less resources now.

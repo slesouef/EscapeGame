@@ -20,37 +20,34 @@ class Character:
         # refer to current level structure
         self.level = level
 
-    def move(self, direction):
-        """update player location by tile depending on direction input"""
+    def move_right(self):
+        """moves player one tile right"""
+        # check the move is inside window:
+        if self.tile_x + 1 <= (SPRITES_PER_ROW - 1):
+            # check tile is not a wall
+            if self.level.structure[self.tile_y][self.tile_x + 1] != "M":
+                # move character one tile
+                self.tile_x += 1
+                # update pixel value
+                self.pixel_x = self.tile_x * TILE_SIZE
 
-        # move character right
-        if direction == "right":
-            # check the move is inside window:
-            if self.tile_x + 1 <= (SPRITES_PER_ROW - 1):
-                # check tile is not a wall
-                if self.level.structure[self.tile_y][self.tile_x + 1] != "M":
-                    # move character one tile
-                    self.tile_x += 1
-                    # update pixel value
-                    self.pixel_x = self.tile_x * TILE_SIZE
+    def move_left(self):
+        """moves player one tile left"""
+        if self.tile_x - 1 >= 0:
+            if self.level.structure[self.tile_y][self.tile_x - 1] != "M":
+                self.tile_x -= 1
+                self.pixel_x = self.tile_x * TILE_SIZE
 
-        # move character left
-        if direction == "left":
-            if self.tile_x - 1 >= 0:
-                if self.level.structure[self.tile_y][self.tile_x - 1] != "M":
-                    self.tile_x -= 1
-                    self.pixel_x = self.tile_x * TILE_SIZE
+    def move_up(self):
+        """move player up one tile"""
+        if self.tile_y - 1 >= 0:
+            if self.level.structure[self.tile_y - 1][self.tile_x] != "M":
+                self.tile_y -= 1
+                self.pixel_y = self.tile_y * TILE_SIZE
 
-        # move character up
-        if direction == "up":
-            if self.tile_y - 1 >= 0:
-                if self.level.structure[self.tile_y - 1][self.tile_x] != "M":
-                    self.tile_y -= 1
-                    self.pixel_y = self.tile_y * TILE_SIZE
-
-        # move character down
-        if direction == "down":
-            if self.tile_y + 1 <= (SPRITES_PER_ROW - 1):
-                if self.level.structure[self.tile_y + 1][self.tile_x] != "M":
-                    self.tile_y += 1
-                    self.pixel_y = self.tile_y * TILE_SIZE
+    def move_down(self):
+        """move player one tile down"""
+        if self.tile_y + 1 <= (SPRITES_PER_ROW - 1):
+            if self.level.structure[self.tile_y + 1][self.tile_x] != "M":
+                self.tile_y += 1
+                self.pixel_y = self.tile_y * TILE_SIZE

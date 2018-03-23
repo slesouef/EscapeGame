@@ -17,15 +17,6 @@ class Mypygame:
         # set window caption
         pygame.display.set_caption(CAPTION)
 
-    def display_landing(self):
-        """method to display landing screen"""
-        # setup game menu
-        landing = pygame.image.load(MENU_IMAGE)
-        self.window.blit(landing, (0, 0))
-
-        #refresh display
-        pygame.display.update()
-
     def load_asset(self, asset):
         """method to load graphic assets from file"""
         tile_asset = pygame.image.load(asset).convert_alpha()
@@ -38,3 +29,8 @@ class Mypygame:
     def refresh_display(self):
         """method to update the game window"""
         pygame.display.update()
+
+    def get_events(self):
+        """methode to get keyboard events"""
+        events = pygame.event.get()
+        return events

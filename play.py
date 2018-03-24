@@ -74,6 +74,7 @@ class Play:
         self.level.display_level()
         self.items.display_items(self.mypygame.window)
         self.mypygame.display_asset(self.mcg.image, [self.mcg.pixel_x, self.mcg.pixel_y])
+        self.items.display_counter()
         # refresh display window
         self.mypygame.refresh_display()
 

@@ -34,3 +34,9 @@ class Mypygame:
         """methode to get keyboard events"""
         events = pygame.event.get()
         return events
+
+    def display_text(self, text, position):
+        """method to create text image to be displayed"""
+        my_font = pygame.font.Font(None, 20)
+        text_displayed = my_font.render(text, 1, (0, 0, 0), (255, 255, 255))
+        self.window.blit(text_displayed, position)

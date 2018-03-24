@@ -49,3 +49,8 @@ class Item:
         self.level.structure[item_tile_y][item_tile_x] = "O"
         # increment inventory counter
         self.picked_up_item += 1
+
+    def display_counter(self):
+        """display the item counter in window"""
+        counter = ("items picked up = {}".format(self.picked_up_item))
+        self.mypygame.display_text(counter, (0, 430))

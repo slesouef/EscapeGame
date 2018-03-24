@@ -18,3 +18,6 @@ a guard in order to escape a labytinth
 1.1 created a wrapper for pygame calls in order to increase efficiency
 
 1.2 load calls have been reduced to once per class. Game uses less resources now.
+
+2.0 refactoring completed. 
+        Known issue: cannot quit directly from level.

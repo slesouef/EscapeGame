@@ -13,13 +13,17 @@ class Mypygame:
     def __init__(self):
         # initiate pygame
         pygame.init()
-        self.window = pygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
+        self.mypygame = pygame
+        # fix pygame bug #331 (100% CPU utilization)
+        self.mypygame.mixer.quit()
+        # create game window
+        self.window = self.mypygame.display.set_mode((WINDOW_SIZE, WINDOW_SIZE))
         # set window caption
-        pygame.display.set_caption(CAPTION)
+        self.mypygame.display.set_caption(CAPTION)
 
     def load_asset(self, asset):
         """method to load graphic assets from file"""
-        tile_asset = pygame.image.load(asset).convert_alpha()
+        tile_asset = self.mypygame.image.load(asset).convert_alpha()
         return tile_asset
 
     def display_asset(self, item, position):
@@ -28,15 +32,15 @@ class Mypygame:
 
     def refresh_display(self):
         """method to update the game window"""
-        pygame.display.update()
+        self.mypygame.display.update()
 
     def get_events(self):
         """methode to get keyboard events"""
-        events = pygame.event.get()
+        events = self.mypygame.event.get()
         return events
 
     def display_text(self, text, position):
         """method to create text image to be displayed"""
-        my_font = pygame.font.Font(None, 20)
+        my_font = self.mypygame.font.Font(None, 20)
         text_displayed = my_font.render(text, 1, (0, 0, 0), (255, 255, 255))
         self.window.blit(text_displayed, position)

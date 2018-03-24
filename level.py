@@ -10,8 +10,11 @@ class Level:
     """level structure must be imported from an external file"""
 
     def __init__(self, file):
+        # class elements
         self.file = file
         self.structure = []
+        self.items = ["B", "P", "N"]
+        # initiate wrapper
         self.mypygame = Mypygame()
         # load assets
         self.wall = self.mypygame.load_asset(WALL_IMAGE)
@@ -31,26 +34,18 @@ class Level:
 
     def create_items(self):
         """method to modify level structure with item markers at random location"""
-        # create randomization loop counter
-        items_set = 0
-        while items_set < 3:# for item in items
+        for item in self.items:
             # create random values for x,y item coordinates
             item_x = random.randint(1, (SPRITES_PER_ROW - 1))
             item_y = random.randint(1, (SPRITES_PER_ROW - 1))
             # if check random position is not a wall
             if self.structure[item_y][item_x] != "M":
-                if items_set == 0:
-                    # modify level structure with item marker
-                    self.structure[item_y][item_x] = "B"
-                elif items_set == 1:
-                    self.structure[item_y][item_x] = "P"
-                elif items_set == 2:
-                    self.structure[item_y][item_x] = "N"
-                # increment counter
-                items_set += 1
-            # else restart loop from random values creation
+                # modify level structure with item marker
+                self.structure[item_y][item_x] = item
             else:
-                continue
+                # add item back to array until 3 items are placed
+                self.items.append(item)
+        return self.structure
 
     def display_level(self):
         """display level in pygame from structure"""

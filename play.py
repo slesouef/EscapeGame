@@ -10,6 +10,7 @@ from mypygame import *
 from constants import *
 
 class Play:
+    """class to manipulate the level"""
 
     def __init__(self, file):
         # initiate loop
@@ -32,9 +33,8 @@ class Play:
         """build level display"""
         # create level
         self.level.create_level()
+        # insert items
         self.level.create_items()
-        self.level.display_level()
-        self.mypygame.refresh_display()
 
     def play_level(self):
         """level sub loop for the game"""
@@ -42,7 +42,8 @@ class Play:
         for events in self.mypygame.get_events():
             if events.type == QUIT:
                 # game exit
-                pass
+                self.playing = 0
+                break
             elif events.type == KEYDOWN:
                 if events.key == K_ESCAPE:
                     # return to menu

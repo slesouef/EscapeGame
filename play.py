@@ -9,6 +9,7 @@ from item import *
 from mypygame import *
 from constants import *
 
+
 class Play:
     """class to manipulate the level"""
 
@@ -27,7 +28,6 @@ class Play:
         self.won = self.mypygame.load_asset(WON_IMAGE)
         # load lose splash
         self.lost = self.mypygame.load_asset(LOST_IMAGE)
-
 
     def initiate_level(self):
         """build level display"""
@@ -78,11 +78,10 @@ class Play:
         # refresh display window
         self.mypygame.refresh_display()
 
-
     def victory_check(self):
         """check if user has fufilled victory condition"""
         if self.level.structure[self.mcg.tile_y][self.mcg.tile_x] == "A":
-            if self.items.picked_up_item == 3: # game won
+            if self.items.picked_up_item == 3:  # game won
                 # display splash screen
                 self.mypygame.display_asset(self.won, [0, 0])
                 self.mypygame.refresh_display()

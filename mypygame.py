@@ -7,6 +7,7 @@ from pygame.locals import *
 
 from constants import *
 
+
 class Mypygame:
     """centralize the calls made to pygame in this class"""
 

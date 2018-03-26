@@ -6,6 +6,7 @@ import random
 from mypygame import *
 from constants import *
 
+
 class Level:
     """level structure must be imported from an external file"""
 
@@ -22,14 +23,14 @@ class Level:
 
     def create_level(self):
         """create level structure from file"""
-        with open(self.file, "r") as level_file: # open file from hdd
-            grid = [] # initialize main layout array
+        with open(self.file, "r") as level_file:  # open file from hdd
+            grid = []  # initialize main layout array
             for line in level_file:
-                grid_line = [] # initialize array for single line
+                grid_line = []  # initialize array for single line
                 for box in line:
                     if box != "\n":
-                        grid_line.append(box) # add wall element to line array
-                grid.append(grid_line) # add line array to main array
+                        grid_line.append(box)  # add wall element to line array
+                grid.append(grid_line)  # add line array to main array
         self.structure = grid
 
     def create_items(self):
@@ -54,8 +55,8 @@ class Level:
         for line in self.structure:
             nb_tile = 0
             for tile in line:
-                pixel_x = nb_tile * TILE_SIZE # set x pixel value to be displayed from tile size
-                pixel_y = nb_line * TILE_SIZE # set y pixel value to be displayed from tile size
+                pixel_x = nb_tile * TILE_SIZE  # set x pixel value to be displayed from tile size
+                pixel_y = nb_line * TILE_SIZE  # set y pixel value to be displayed from tile size
                 position = [pixel_x, pixel_y]
                 if tile == "M":
                     self.mypygame.display_asset(self.wall, position)

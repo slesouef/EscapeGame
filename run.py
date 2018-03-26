@@ -4,6 +4,7 @@
 from menu import *
 from play import *
 
+
 def main():
     """main game function with menu and level subloops"""
     # initiate menu
@@ -17,7 +18,7 @@ def main():
             play = Play(menu.file)
             play.initiate_level()
             play.refresh()
-            #play loop
+            # play loop
             while play.playing == 1:
                 # reset menu loop
                 menu.menu_open = 1

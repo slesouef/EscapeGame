@@ -4,6 +4,7 @@
 from mypygame import *
 from constants import *
 
+
 class Menu:
     """class containing the main loops necessary to run the game"""
 
@@ -28,7 +29,7 @@ class Menu:
         # game events in menu
         for events in self.mypygame.get_events():
             if events.type == QUIT or events.type == KEYDOWN \
-            and events.key == K_ESCAPE: #game exit
+            and events.key == K_ESCAPE:  # game exit
                 self.menu_open = 0
                 break
             elif events.type == KEYDOWN and events.key == K_RETURN:

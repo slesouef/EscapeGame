@@ -6,8 +6,9 @@ counter"""
 from mypygame import *
 from constants import *
 
+
 class Item:
-    """docsting"""
+    """methods to act on items in game level"""
 
     def __init__(self, level):
         # refer to current level structure

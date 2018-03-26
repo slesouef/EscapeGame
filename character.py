@@ -4,6 +4,7 @@
 from mypygame import *
 from constants import *
 
+
 class Character:
     """character attributes and move function"""
 
@@ -12,8 +13,8 @@ class Character:
         # sprite
         self.image = self.mypygame.load_asset(PLAYER_IMAGE)
         # position
-        self.tile_x = 0 # starting tile value
-        self.tile_y = 0 # starting line value
+        self.tile_x = 0  # starting tile value
+        self.tile_y = 0  # starting line value
         # starting pixel values
         self.pixel_x = 0
         self.pixel_y = 0

@@ -1,7 +1,9 @@
 # EscapeGame
 
 Create a game where the player has to pick up three items to be able to defeat
-a guard in order to escape a labytinth
+a guard in order to escape a labyrinth
+
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
 
 # Version
 
